@@ -134,6 +134,6 @@
 
 ; for emacs24 or higher
 (when (>= emacs-major-version 24)
-  (when (require 'color-theme-solarized)
-    (color-theme-solarized-dark)))
+  (el-get 'sync '(color-theme-solarized))
+  (color-theme-solarized-dark)))
 
