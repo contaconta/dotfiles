@@ -55,19 +55,20 @@
 ;; 行番号表示
 (global-linum-mode t)
 (set-face-attribute 'linum nil
-		    :foreground "#800"
-		    :height 0.9)
+       :foreground "#800"
+       :height 0.9)
 
 ;; 行番号フォーマット
 (setq linum-format "%4d| ")
 
+
 ;; 括弧の範囲内を強調表示
-(show-paren-mode t)
-(setq show-paren-delay 0)
-(setq show-paren-style 'expression)
+;(show-paren-mode t)
+;(setq show-paren-delay 0)
+;(setq show-paren-style 'expression)
 
 ;; 括弧の範囲色
-(set-face-background 'show-paren-match-face "#115")
+;(set-face-background 'show-paren-match-face "#111")
 
 ;; 対応する括弧を光らせる
 (show-paren-mode 1)
@@ -105,9 +106,8 @@
   (url-retrieve
    "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
    (lambda (s)
-     (let (el-get-master-branch)
-       (goto-char (point-max))
-       (eval-print-last-sexp)))))
+     (goto-char (point-max))
+     (eval-print-last-sexp))))
 
 (el-get 'sync)
 
@@ -116,15 +116,24 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (el-get 'sync '(auto-complete))
 (add-hook 'auto-complete-mode-hook
-	  (lambda ()
-	    (define-key ac-completing-map (kbd "C-n") 'ac-next)
-	    (define-key ac-completing-map (kbd "C-p") 'ac-previous)))
+          (lambda ()
+            (define-key ac-completing-map (kbd "C-n") 'ac-next)
+            (define-key ac-completing-map (kbd "C-p") 'ac-previous)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; color-theme
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(when (require 'color-theme)
-  (color-theme-initialize)
-  (color-theme-charcoal-black))
+(el-get 'sync '(color-theme))
+(color-theme-initialize)
+(color-theme-charcoal-black)
+
+; for emacs24 or higher
+(when (require 'color-theme-solarized)
+  (color-theme-solarized-dark))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; anything
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(el-get 'sync '(anything))
 
