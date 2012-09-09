@@ -1,5 +1,5 @@
 ; -*- Mode: Emacs-Lisp ; Coding: utf-8 -*-
-;  auto-complete, color-theme, anything
+;  these packages are requied: auto-complete, color-theme, anything
 ;; ------------------------------------------------------------------------
 ;; @ load-path
 
