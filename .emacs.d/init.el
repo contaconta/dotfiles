@@ -64,20 +64,20 @@
 
 
 ;; 括弧の範囲内を強調表示
-;(show-paren-mode t)
-;(setq show-paren-delay 0)
-;(setq show-paren-style 'expression)
+                                        ;(show-paren-mode t)
+                                        ;(setq show-paren-delay 0)
+                                        ;(setq show-paren-style 'expression)
 
 ;; 括弧の範囲色
-;(set-face-background 'show-paren-match-face "#111")
+                                        ;(set-face-background 'show-paren-match-face "#111")
 
 ;; 対応する括弧を光らせる
 (show-paren-mode 1)
 
-;(set-cursor-color "orange")
-;(setq blink-cursor-interval 0.2)
-;(setq blink-cursor-delay 1.0)
-;(blink-cursor-mode 1)
+                                        ;(set-cursor-color "orange")
+                                        ;(setq blink-cursor-interval 0.2)
+                                        ;(setq blink-cursor-delay 1.0)
+                                        ;(blink-cursor-mode 1)
 
 ;; 警告音を停止
 (setq ring-bell-function 'ignore)
@@ -92,10 +92,81 @@
 (custom-set-variables '(tab-width 2))
 
 ;; デフォルトの透明度を設定する
-;(add-to-list 'default-frame-alist '(alpha . 80))
+                                        ;(add-to-list 'default-frame-alist '(alpha . 80))
 
 ;; カレントウィンドウの透明度を変更する
-;(set-frame-parameter nil 'alpha 80)
+                                        ;(set-frame-parameter nil 'alpha 80)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; window-resizer
+;;  http://d.hatena.ne.jp/mooz/20100119/p1
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun window-resizer ()
+  "Control window size and position."
+  (interactive)
+  (let ((window-obj (selected-window))
+        (current-width (window-width))
+        (current-height (window-height))
+        (dx (if (= (nth 0 (window-edges)) 0) 1
+              -1))
+        (dy (if (= (nth 1 (window-edges)) 0) 1
+              -1))
+        c)
+    (catch 'end-flag
+      (while t
+        (message "size[%dx%d]"
+                 (window-width) (window-height))
+        (setq c (read-char))
+        (cond ((= c ?l)
+               (enlarge-window-horizontally dx))
+              ((= c ?h)
+               (shrink-window-horizontally dx))
+              ((= c ?j)
+               (enlarge-window dy))
+              ((= c ?k)
+               (shrink-window dy))
+              ;; otherwise
+              (t
+               (message "Quit")
+               (throw 'end-flag t)))))))
+
+;;
+;; window-resizer は C-q C-r (resize) で
+(global-set-key "\C-x\C-r" 'window-resizer)
+
+(global-set-key "\C-xl" 'windmove-right)
+(global-set-key "\C-xh" 'windmove-left)
+(global-set-key "\C-xj" 'windmove-down)
+(global-set-key "\C-xk" 'windmove-up)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; 画面を3分割する
+;;  http://d.hatena.ne.jp/ground256/20110126/1296035198
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun split-window-vertically-n (num_wins)
+  (interactive "p")
+  (if (= num_wins 2)
+      (split-window-vertically)
+    (progn
+      (split-window-vertically
+       (- (window-height) (/ (window-height) num_wins)))
+      (split-window-vertically-n (- num_wins 1)))))
+(defun split-window-horizontally-n (num_wins)
+  (interactive "p")
+  (if (= num_wins 2)
+      (split-window-horizontally)
+    (progn
+      (split-window-horizontally
+       (- (window-width) (/ (window-width) num_wins)))
+      (split-window-horizontally-n (- num_wins 1)))))
+;; 
+(global-set-key "\C-x@" '(lambda ()
+                           (interactive)
+                           (split-window-vertically-n 3)))
+
+
+
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; el-get
