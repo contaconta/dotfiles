@@ -209,3 +209,10 @@
   (el-get 'sync '(color-theme-solarized))
   (color-theme-solarized-dark))
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; emacs-nav
+;;  http://code.google.com/p/emacs-nav/
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(add-to-list 'load-path "~/.emacs.d/lisp/emacs-nav/")
+(require 'nav)
