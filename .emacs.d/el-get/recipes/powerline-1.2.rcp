@@ -1,0 +1,5 @@
+(:name powerline-1.2
+       :type http
+       :description "fancy statusline"
+       :url "http://www.emacswiki.org/emacs/download/powerline.el")
+

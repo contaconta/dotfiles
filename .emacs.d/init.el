@@ -181,7 +181,13 @@
      (goto-char (point-max))
      (eval-print-last-sexp))))
 
+;; レシピ置き場
+(add-to-list 'el-get-recipe-path
+             (concat (file-name-directory load-file-name) "/el-get/recipes"))
+
 (el-get 'sync)
+
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; auto-complete
@@ -191,6 +197,11 @@
           (lambda ()
             (define-key ac-completing-map (kbd "C-n") 'ac-next)
             (define-key ac-completing-map (kbd "C-p") 'ac-previous)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; popup
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(el-get 'sync '(popup))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; anything
@@ -204,7 +215,7 @@
 (color-theme-initialize)
 (color-theme-charcoal-black)
 
-; for emacs24 or higher
+                                        ; for emacs24 or higher
 (when (>= emacs-major-version 24)
   (el-get 'sync '(color-theme-solarized))
   (color-theme-solarized-dark))
@@ -216,3 +227,11 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (add-to-list 'load-path "~/.emacs.d/lisp/emacs-nav/")
 (require 'nav)
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; powerline.el
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;(el-get 'sync '(powerline-1.2))
+

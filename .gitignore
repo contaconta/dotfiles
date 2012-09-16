@@ -1,2 +1,3 @@
 .emacs.d/el-get/*
+!.emacs.d/el-get/recipes
 *.elc
