@@ -1,13 +1,13 @@
 #!/bin/sh
 
 # install oh-my-zsh
-curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+#curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
 
 # symlink dotfiles
 cd $(dirname $0)
 for dotfile in .?*
 do
-    if [ $dotfile != '..' ] && [ $dotfile != '.git' ] && [ $dotfile != '.gitignore' ]
+    if [ $dotfile != '..' ] && [ $dotfile != '.git' ] && [ $dotfile != '.gitignore' ] && [ $dotfile != '.DS_Store' ]
     then
         ln -Fis "$PWD/$dotfile" $HOME
         echo "link $PWD/$dotfile to $HOME"
@@ -24,5 +24,3 @@ do
         echo "link $PWD/$zshfiles" "to" "$HOME/.oh-my-zsh/custom"
     fi
 done
-
-source ~/.zshrc
