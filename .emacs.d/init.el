@@ -64,20 +64,20 @@
 
 
 ;; 括弧の範囲内を強調表示
-                                        ;(show-paren-mode t)
-                                        ;(setq show-paren-delay 0)
-                                        ;(setq show-paren-style 'expression)
+;(show-paren-mode t)
+;(setq show-paren-delay 0)
+;(setq show-paren-style 'expression)
 
 ;; 括弧の範囲色
-                                        ;(set-face-background 'show-paren-match-face "#111")
+;(set-face-background 'show-paren-match-face "#111")
 
 ;; 対応する括弧を光らせる
 (show-paren-mode 1)
 
-                                        ;(set-cursor-color "orange")
-                                        ;(setq blink-cursor-interval 0.2)
-                                        ;(setq blink-cursor-delay 1.0)
-                                        ;(blink-cursor-mode 1)
+;(set-cursor-color "orange")
+;(setq blink-cursor-interval 0.2)
+;(setq blink-cursor-delay 1.0)
+;(blink-cursor-mode 1)
 
 ;; 警告音を停止
 (setq ring-bell-function 'ignore)
@@ -89,13 +89,16 @@
 (setq-default indent-tabs-mode nil)
 
 ;; タブ幅
-(custom-set-variables '(tab-width 2))
+(custom-set-variables '(tab-width 4))
 
 ;; デフォルトの透明度を設定する
-                                        ;(add-to-list 'default-frame-alist '(alpha . 80))
+;(add-to-list 'default-frame-alist '(alpha . 80))
 
 ;; カレントウィンドウの透明度を変更する
-                                        ;(set-frame-parameter nil 'alpha 80)
+;(set-frame-parameter nil 'alpha 80)
+
+;; バッファ自動再読み込み
+(global-auto-revert-mode 1)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; window-resizer
@@ -164,10 +167,6 @@
                            (interactive)
                            (split-window-vertically-n 3)))
 
-
-
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; el-get
 ;;  https://github.com/dimitri/el-get
@@ -187,26 +186,38 @@
 
 (el-get 'sync)
 
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; anything
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(el-get 'sync '(anything))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; auto-complete
+;;  http://cx4a.org/software/auto-complete/manual.ja.html
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (el-get 'sync '(auto-complete))
 (add-hook 'auto-complete-mode-hook
           (lambda ()
-            (define-key ac-completing-map (kbd "C-n") 'ac-next)
-            (define-key ac-completing-map (kbd "C-p") 'ac-previous)))
+            ;(define-key ac-completing-map (kbd "C-n") 'ac-next)
+            ;(define-key ac-completing-map (kbd "C-p") 'ac-previous)
+            (define-key ac-menu-map (kbd "C-n") 'ac-next)
+            (define-key ac-menu-map (kbd "C-p") 'ac-previous)
+            (define-key ac-mode-map (kbd "M-/") 'auto-complete)))
+
+;; auto-complete config
+(require 'auto-complete-config)
+;(ac-config-default)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/elisp/auto-complete/ac-dict")
+;(setq ac-auto-start nil)
+(ac-set-trigger-key "TAB")
+; (global-set-key "\M-/" 'ac-start)
+(global-auto-complete-mode t)
+(setq ac-use-menu-map t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; popup
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (el-get 'sync '(popup))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; anything
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(el-get 'sync '(anything))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; color-theme
@@ -215,11 +226,10 @@
 (color-theme-initialize)
 (color-theme-charcoal-black)
 
-                                        ; for emacs24 or higher
+; for emacs24 or higher
 (when (>= emacs-major-version 24)
   (el-get 'sync '(color-theme-solarized))
   (color-theme-solarized-dark))
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; emacs-nav
@@ -227,8 +237,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (add-to-list 'load-path "~/.emacs.d/lisp/emacs-nav/")
 (require 'nav)
-
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; powerline.el
