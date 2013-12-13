@@ -33,12 +33,12 @@
 (define-key global-map (kbd "C-h") 'delete-backward-char) ; 削除
 (define-key global-map (kbd "M-?") 'help-for-help)        ; ヘルプ
 (define-key global-map (kbd "C-z") 'undo)                 ; undo
-(define-key global-map (kbd "C-x /") 'undo)                 ; undo
+(define-key global-map (kbd "C-x /") 'undo)               ; undo
 (define-key global-map (kbd "C-c i") 'indent-region)      ; インデント
-;(define-key global-map (kbd "C-c C-i") 'hippie-expand)    ; 補完
+;(define-key global-map (kbd "C-c C-i") 'hippie-expand)   ; 補完
 (define-key global-map (kbd "C-c ;") 'comment-dwim)       ; コメントアウト
-(define-key global-map (kbd "C-c :") 'uncomment-region)    ; コメント解除
-;(define-key global-map (kbd "C-o") 'toggle-input-method)  ; 日本語入力切替
+(define-key global-map (kbd "C-c :") 'uncomment-region)   ; コメント解除
+;(define-key global-map (kbd "C-o") 'toggle-input-method) ; 日本語入力切替
 (define-key global-map (kbd "M-C-g") 'grep)               ; grep
 (define-key global-map (kbd "C-m") 'newline-and-indent)
 (define-key global-map (kbd "C-q") 'suspend-emacs) ; suspend
@@ -100,6 +100,7 @@
 ;; バッファ自動再読み込み
 (global-auto-revert-mode 1)
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; window-resizer
 ;;  http://d.hatena.ne.jp/mooz/20100119/p1
@@ -135,12 +136,12 @@
 
 ;;
 ;; window-resizer は C-q C-r (resize) で
-(global-set-key "\C-x\C-r" 'window-resizer)
+;(global-set-key "\C-x\C-r" 'window-resizer)
 
-(global-set-key "\C-xl" 'windmove-right)
-(global-set-key "\C-xh" 'windmove-left)
-(global-set-key "\C-xj" 'windmove-down)
-(global-set-key "\C-xk" 'windmove-up)
+; (global-set-key "\C-xl" 'windmove-right)
+; (global-set-key "\C-xh" 'windmove-left)
+; (global-set-key "\C-xj" 'windmove-down)
+; (global-set-key "\C-xk" 'windmove-up)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; 画面を3分割する
@@ -191,6 +192,17 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (el-get 'sync '(anything))
 
+;; anythingの設定
+(require 'anything-startup)
+(global-set-key (kbd "C-x b") 'anything-for-files)
+(global-set-key (kbd "M-y") 'anything-show-kill-ring)
+(global-set-key (kbd "C-x C-f") 'anything-find-files)
+(global-set-key (kbd "C-x M-x") 'anything-M-x)
+
+(setq recentf-max-menu-items 10)        ;; 表示するファイルの数
+(setq recentf-max-saved-items 30)       ;; 保存するファイルの数
+(setq kill-ring-max 100)                ;; kill-ring で保存される最大値
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; auto-complete
 ;;  http://cx4a.org/software/auto-complete/manual.ja.html
@@ -235,8 +247,8 @@
 ;; emacs-nav
 ;;  http://code.google.com/p/emacs-nav/
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(add-to-list 'load-path "~/.emacs.d/lisp/emacs-nav/")
-(require 'nav)
+;(add-to-list 'load-path "~/.emacs.d/lisp/emacs-nav/")
+;(require 'nav)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; powerline.el
