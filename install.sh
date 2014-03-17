@@ -47,7 +47,8 @@ done
 ###############################################################
 # symlink *.zsh files to ~/.oh-my-zsh/custom
 ###############################################################
-function link_file_to_custom_dir(){
+link_file_to_custom_dir ()
+{
     zshfiles=$1
     if [ ! -e $zshfiles ]; then
         echo "file does not exist: ${zshfiles}" >&2
