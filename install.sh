@@ -70,15 +70,15 @@ done
 
 # link others
 cd ${SCRIPT_DIR}
-case "$OSTYPE" in
-    darwin*)
+OS=`uname`
+case ${OS} in
+    Darwin)
     echo "link MacOSX scripts"
     for zshfiles in zshrcs/macosx/*.zsh; do
         link_file_to_custom_dir $zshfiles
     done
     ;;
-
-    linux*)
+    Linux)
     echo "link linux scripts"
     for zshfiles in zshrcs/linux/*.zsh; do
         link_file_to_custom_dir $zshfiles
