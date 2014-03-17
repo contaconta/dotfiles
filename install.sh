@@ -2,6 +2,8 @@
 set -e
 
 SCRIPT_DIR=$(dirname $0)
+OS=`uname`
+
 cd ${SCRIPT_DIR}
 
 #####################
@@ -32,6 +34,21 @@ if [ -e $tmux_default_theme_path ]; then
 fi
 echo "link powerline theme"
 ln -s "${HOME}/dotfiles/powerline_conf/default.sh" $tmux_default_theme_path
+
+#####################
+# symlink .tmux.conf
+#####################
+cd ${SCRIPT_DIR}
+case ${OS} in
+    Darwin)
+    ln -Fis "tmux.mac.conf" "${HOME}/.tmux.conf"
+    echo "link tmux.mac.conf ${HOME}/.tmux.conf"
+    ;;
+    Linux)
+    ln -Fis "tmux.linux.conf" "${HOME}/.tmux.conf"
+    echo "link tmux.linux.conf ${HOME}/.tmux.conf"
+    ;;
+esac
 
 #####################
 # symlink dotfiles
@@ -70,7 +87,6 @@ done
 
 # link others
 cd ${SCRIPT_DIR}
-OS=`uname`
 case ${OS} in
     Darwin)
     echo "link MacOSX scripts"
