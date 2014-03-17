@@ -1,8 +1,8 @@
 #!/bin/sh
 set -e
 
-# symlink dotfiles
-cd $(dirname $0)
+SCRIPT_DIR=$(dirname $0)
+cd ${SCRIPT_DIR}
 
 #####################
 # install oh-my-zsh
@@ -11,7 +11,7 @@ if [ -d ${HOME}/.oh-my-zsh ]; then
     echo 'oh-my-zsh is already installed.'
 else
     echo 'install oh-my-zsh'
-#    curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+    curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
 fi
 
 #####################
@@ -33,24 +33,55 @@ fi
 echo "link powerline theme"
 ln -s "${HOME}/dotfiles/powerline_conf/default.sh" $tmux_default_theme_path
 
+#####################
 # symlink dotfiles
-cd $(dirname $0)
-for dotfile in .?*
-do
-    if [ $dotfile != '..' ] && [ $dotfile != '.git' ] && [ $dotfile != '.gitignore' ] && [ $dotfile != '.DS_Store' ]
-    then
+#####################
+cd ${SCRIPT_DIR}
+for dotfile in .?*; do
+    if [ $dotfile != '..' ] && [ $dotfile != '.git' ] && [ $dotfile != '.gitignore' ] && [ $dotfile != '.DS_Store' ]; then
         ln -Fis "$PWD/$dotfile" $HOME
         echo "link $PWD/$dotfile to $HOME"
     fi
 done
 
+###############################################################
 # symlink *.zsh files to ~/.oh-my-zsh/custom
-cd $(dirname $0)
-for zshfiles in zshrcs/*.zsh
-do
-    if [ $zshfiles != '..' ] && [ $zshfiles != '.git' ] && [ $zshfiles != '.gitignore' ]
-    then
+###############################################################
+function link_file_to_custom_dir(){
+    zshfiles=$1
+    if [ ! -e $zshfiles ]; then
+        echo "file does not exist: ${zshfiles}" >&2
+        return 1
+    fi
+
+    if [ $dotfile != '..' ] && [ $dotfile != '.git' ] && [ $dotfile != '.gitignore' ] && [ $dotfile != '.DS_Store' ]; then
         ln -Fis "$PWD/$zshfiles" "$HOME/.oh-my-zsh/custom"
         echo "link $PWD/$zshfiles" "to" "$HOME/.oh-my-zsh/custom"
     fi
+    return 0
+}
+
+# link shared files
+cd ${SCRIPT_DIR}
+for zshfiles in zshrcs/shared/*.zsh; do
+    link_file_to_custom_dir $zshfiles
 done
+
+# link others
+cd ${SCRIPT_DIR}
+case "$OSTYPE" in
+    darwin*)
+    echo "link MacOSX scripts"
+    for zshfiles in zshrcs/macosx/*.zsh; do
+        link_file_to_custom_dir $zshfiles
+    done
+    ;;
+
+    linux*)
+    echo "link linux scripts"
+    for zshfiles in zshrcs/linux/*.zsh; do
+        link_file_to_custom_dir $zshfiles
+    done
+    ;;
+esac
+
