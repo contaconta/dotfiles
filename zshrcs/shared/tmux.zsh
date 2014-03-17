@@ -1,7 +1,6 @@
 echo "tmux functions..."
 # http://robinwinslow.co.uk/2012/07/20/tmux-and-ssh-auto-login-with-ssh-agent-finally/
 function tmux_ssh() {
-
     if [ -z "$TMUX" ]; then
         # we're not in a tmux session
 
@@ -16,7 +15,7 @@ function tmux_ssh() {
             # if socket is available create the new auth session
             if [ ! -S "$SSH_AUTH_SOCK" ]; then
                 `ssh-agent -a $SSH_AUTH_SOCK` &> /dev/null
-                echo $SSH_AGENT_PID &gt; $HOME/.ssh/.auth_pid
+                echo $SSH_AGENT_PID > $HOME/.ssh/.auth_pid
             fi
 
             # if agent isn't defined, recreate it from pid file
@@ -39,15 +38,15 @@ function attach_tmux() {
         if ( tmux has-session ); then
             session=`tmux list-sessions | grep -e '^[0-9].*]$' | head -n 1 | sed -e 's/^\([0-9]\+\).*$/\1/'`
             if [ -n "$session" ]; then
-                echo "Attache tmux session $session."
-                #tmux attach-session -t $session
-                tmux attach-session
+                echo "attach_tmux(): Attache tmux session $session."
+                tmux attach-session -t $session
+                #tmux attach-session
             else
-                echo "Session has been already attached."
+                echo "attach_tmux(): Session has been already attached."
                 tmux list-sessions
             fi
         else
-            echo "Create new tmux session."
+            echo "attach_tmux(): Create new tmux session."
             tmux
         fi
     fi
