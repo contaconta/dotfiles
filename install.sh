@@ -41,12 +41,12 @@ ln -s "${HOME}/dotfiles/powerline_conf/default.sh" $tmux_default_theme_path
 cd ${SCRIPT_DIR}
 case ${OS} in
     Darwin)
-    ln -Fis "tmux.mac.conf" "${HOME}/.tmux.conf"
-    echo "link tmux.mac.conf ${HOME}/.tmux.conf"
+    ln -Fis "$PWD/tmux.mac.conf" "${HOME}/.tmux.conf"
+    echo "link $PWD/tmux.mac.conf ${HOME}/.tmux.conf"
     ;;
     Linux)
-    ln -Fis "tmux.linux.conf" "${HOME}/.tmux.conf"
-    echo "link tmux.linux.conf ${HOME}/.tmux.conf"
+    ln -Fis "$PWD/tmux.linux.conf" "${HOME}/.tmux.conf"
+    echo "link $PWD/tmux.linux.conf ${HOME}/.tmux.conf"
     ;;
 esac
 
