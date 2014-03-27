@@ -66,15 +66,15 @@ done
 ###############################################################
 link_file_to_custom_dir ()
 {
-    zshfiles=$1
-    if [ ! -e $zshfiles ]; then
-        echo "file does not exist: ${zshfiles}" >&2
+    dotfile=$1
+    if [ ! -e $dotfile ]; then
+        echo "file does not exist: ${dotfile}" >&2
         return 1
     fi
 
     if [ $dotfile != '..' ] && [ $dotfile != '.git' ] && [ $dotfile != '.gitignore' ] && [ $dotfile != '.DS_Store' ]; then
-        ln -Fis "$PWD/$zshfiles" "$HOME/.oh-my-zsh/custom"
-        echo "link $PWD/$zshfiles" "to" "$HOME/.oh-my-zsh/custom"
+        ln -Fis "$PWD/$dotfile" "$HOME/.oh-my-zsh/custom"
+        echo "link $PWD/$dotfile" "to" "$HOME/.oh-my-zsh/custom"
     fi
     return 0
 }
