@@ -43,3 +43,6 @@ export OpenCV_DIR=/usr/local/opencv
 # nvm
 ###############################################################################
 [[ -s /Users/ogata/.nvm/nvm.sh ]] && . /Users/ogata/.nvm/nvm.sh
+
+
+export MAKEFLAGS="-j 8"
