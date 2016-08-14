@@ -1,10 +1,10 @@
 #! /usr/bin/env zsh
 set -e
-
-SCRIPT_DIR=$(dirname $0)
 OS=`uname`
 
-cd ${SCRIPT_DIR}
+DOTFILES_ROOT_DIR="${HOME}/dotfiles"
+
+SCRIPT_DIR=$DOTFILES_ROOT_DIR
 AUTOGEN_DIR="${SCRIPT_DIR}/autogen"
 
 #####################
