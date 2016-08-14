@@ -23,6 +23,10 @@ zplug "b4b4r07/enhancd", use:init.sh
 # https://github.com/zplug/zplug/wiki/Configurations
 zplug "peco/peco", as:command, from:gh-r
 
+# from oh-my-zsh
+zplug "lib/key-bindings", from:oh-my-zsh
+zplug "lib/directories", from:oh-my-zsh
+zplug "lib/completion", from:oh-my-zsh
 zplug "themes/cloud", from:oh-my-zsh
 
 # Install plugins if there are plugins that have not been installed
