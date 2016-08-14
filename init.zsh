@@ -3,7 +3,7 @@
 #####################
 # load scripts
 #####################
-SCRIPT_DIR=$(dirname $0)
+SCRIPT_DIR="${HOME}/dotfiles"
 source ${SCRIPT_DIR}/zsh/env.zsh
 source ${SCRIPT_DIR}/zsh/utils.zsh
 source ${SCRIPT_DIR}/zsh/zplug.zsh
