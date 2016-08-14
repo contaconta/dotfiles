@@ -16,31 +16,31 @@ if [ -d ${INSTALL_DIR} ]; then
 else
     echo 'install tmux-powerline'
     git clone https://github.com/erikw/tmux-powerline.git ${INSTALL_DIR}
-
-	# symlink tmux theme
-	tmux_default_theme_path="${INSTALL_DIR}/themes/default.sh"
-	if [ -e $tmux_default_theme_path ]; then
-	    rm $tmux_default_theme_path
-	    echo "remove default tmux theme"
-	fi
-	echo "link powerline theme"
-	ln -s "${SCRIPT_DIR}/tmux/powerline_conf/default.sh" ${tmux_default_theme_path}
-	echo ${tmux_default_theme_path}
-
-	#####################
-	# symlink .tmux.conf
-	#####################
-	case ${OS} in
-	    Darwin)
-	    ln -Fis "${SCRIPT_DIR}/tmux/tmux.mac.conf" "${HOME}/.tmux.conf"
-	    echo "link ${SCRIPT_DIR}/tmux/tmux.mac.conf ${HOME}/.tmux.conf"
-	    ;;
-	    Linux)
-	    ln -Fis "${SCRIPT_DIR}/tmux/tmux.linux.conf" "${HOME}/.tmux.conf"
-	    echo "link ${SCRIPT_DIR}/tmux/tmux.linux.conf ${HOME}/.tmux.conf"
-	    ;;
-	esac
 fi
+
+# symlink tmux theme
+tmux_default_theme_path="${INSTALL_DIR}/themes/default.sh"
+if [ -e $tmux_default_theme_path ]; then
+    rm $tmux_default_theme_path
+    echo "remove default tmux theme"
+fi
+echo "link powerline theme"
+ln -s "${SCRIPT_DIR}/tmux/powerline_conf/default.sh" ${tmux_default_theme_path}
+echo ${tmux_default_theme_path}
+
+#####################
+# symlink .tmux.conf
+#####################
+case ${OS} in
+    Darwin)
+    ln -Fis "${SCRIPT_DIR}/tmux/tmux.mac.conf" "${HOME}/.tmux.conf"
+    echo "link ${SCRIPT_DIR}/tmux/tmux.mac.conf ${HOME}/.tmux.conf"
+    ;;
+    Linux)
+    ln -Fis "${SCRIPT_DIR}/tmux/tmux.linux.conf" "${HOME}/.tmux.conf"
+    echo "link ${SCRIPT_DIR}/tmux/tmux.linux.conf ${HOME}/.tmux.conf"
+    ;;
+esac
 
 #####################
 # sshrc
