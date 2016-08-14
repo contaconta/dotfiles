@@ -1,4 +1,11 @@
-echo "tmux functions..."
+# peco
+function peco-history-selection() {
+    BUFFER=`history -n 1 | tail -r  | awk '!a[$0]++' | peco`
+    CURSOR=$#BUFFER
+    zle reset-prompt
+}
+
+# tmux
 # http://robinwinslow.co.uk/2012/07/20/tmux-and-ssh-auto-login-with-ssh-agent-finally/
 function tmux_ssh() {
     if [ -z "$TMUX" ]; then
@@ -49,5 +56,21 @@ function attach_tmux() {
             echo "attach_tmux(): Create new tmux session."
             tmux
         fi
+    fi
+}
+
+###############################################################################
+# virtualenv
+#   workon set $PS1 environmental variable.
+#   so if you don't want to display "(env01) $" to prompt,
+#   run this script before "source $ZSH/oh-my-zsh.sh"
+###############################################################################
+function set_virtualenv () {
+    if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
+        export WORKON_HOME=$HOME/.virtualenvs
+        export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
+        source /usr/local/bin/virtualenvwrapper.sh
+        export VIRTUALENV_USE_DISTRIBUTE=1
+#        workon pydev2.7
     fi
 }

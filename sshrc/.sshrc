@@ -1,0 +1,26 @@
+tmuxrc() {
+    local TMUXDIR=/tmp/mytmuxserver
+    if ! [ -d $TMUXDIR ]; then
+        rm -rf $TMUXDIR
+        mkdir -p $TMUXDIR
+    fi
+    rm -rf $TMUXDIR/.sshrc.d
+    cp -r $SSHHOME/.sshrc $SSHHOME/bashsshrc $SSHHOME/sshrc $SSHHOME/.sshrc.d $TMUXDIR
+    SSHHOME=$TMUXDIR SHELL=$TMUXDIR/bashsshrc `which tmux` -f $SSHHOME/.sshrc.d/.tmux.conf -S $TMUXDIR/tmuxserver $@
+}
+
+alias tmux="tmux -f $SSHHOME/.sshrc.d/.tmux.conf"
+
+# set default shell
+# SHELL=`which zsh`
+# if ! [ $SHELL ]; then
+#     SHELL=`which bash`
+# fi
+# export SHELL
+
+SHELL=`which bash`
+
+# alias
+alias ll='ls -l'
+alias la='ls -A'
+alias lsa='ls -la'
