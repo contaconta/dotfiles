@@ -20,12 +20,13 @@ fi
 
 # symlink tmux theme
 tmux_default_theme_path="${INSTALL_DIR}/themes/default.sh"
+tmux_custom_theme_path="${SCRIPT_DIR}/tmux/powerline_conf/default.sh"
 if [ -e $tmux_default_theme_path ]; then
     rm $tmux_default_theme_path
     echo "remove default tmux theme"
 fi
 echo "link powerline theme"
-ln -s "${SCRIPT_DIR}/tmux/powerline_conf/default.sh" ${tmux_default_theme_path}
+ln -Fis ${tmux_custom_theme_path} ${tmux_default_theme_path}
 echo ${tmux_default_theme_path}
 
 #####################
