@@ -5,13 +5,11 @@
 ```
 cd ~  
 git clone https://github.com/contaconta/dotfiles.git  
-cd dotfiles    
-zsh install.sh  
+zsh install.sh
 ```
 
-add below to **.zshrc**
+add below to at the top of **.zshrc**
 
 ```
-tmux_ssh
-attach_tmux
+source ~/dotfiles/init.zsh
 ```
