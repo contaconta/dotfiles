@@ -12,13 +12,13 @@ tmuxrc() {
 alias tmux="tmux -f $SSHHOME/.sshrc.d/.tmux.conf"
 
 # set default shell
-# SHELL=`which zsh`
-# if ! [ $SHELL ]; then
-#     SHELL=`which bash`
-# fi
-# export SHELL
+SHELL=`which zsh`
+if ! [ $SHELL ]; then
+    SHELL=`which bash`
+fi
+export SHELL
 
-SHELL=`which bash`
+# SHELL=`which bash`
 
 # alias
 alias ll='ls -l'
