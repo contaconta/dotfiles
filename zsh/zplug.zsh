@@ -12,7 +12,7 @@ zplug "zsh-users/zsh-history-substring-search"
 zplug "zsh-users/zsh-syntax-highlighting", nice:10
 
 # https://github.com/zplug/zplug/wiki/Configurations
-zplug "peco/peco", as:command, from:gh-r
+# zplug "peco/peco", as:command, from:gh-r
 
 # # https://github.com/b4b4r07/enhancd
 # ENHANCD_FILTER=peco; export ENHANCD_FILTER
