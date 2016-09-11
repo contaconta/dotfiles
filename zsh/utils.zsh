@@ -74,3 +74,28 @@ function set_virtualenv () {
 #        workon pydev2.7
     fi
 }
+
+
+function transfer_project_to_remote_workspace () {
+    if [ $# -ne 1 ]; then
+        echo "usage: ${0} <user@host>"
+        exit 1
+    fi
+
+    PROJECT_DIR=$(pwd)
+    REMOTE_DIR="${1}:~/workspace/"
+
+    echo "transfer ${PROJECT_DIR} to ${REMOTE_DIR}"
+
+    rsync -avz \
+          --exclude ".idea" \
+          --exclude ".git" \
+          --exclude ".DS_Store" \
+          --exclude "build" \
+          --exclude "output" \
+          --exclude "*.a" \
+          --exclude "*.o" \
+          --exclude "*.pyc" \
+          --exclude "transfer_remote.sh" \
+          ${PROJECT_DIR} ${REMOTE_DIR}
+}
