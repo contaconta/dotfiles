@@ -53,3 +53,12 @@ else
 	ln -Fis "${SCRIPT_DIR}/sshrc/.sshrc" "${HOME}/.sshrc"
 	ln -Fis "${SCRIPT_DIR}/sshrc/.sshrc.d" "${HOME}/.sshrc.d"
 fi
+
+#####################
+## emacs
+#####################
+EMACS_INIT="${HOME}/.emacs.d/init.el"
+if [ -e ${EMACS_INIT} ]; then
+    rm ${EMACS_INIT}
+    ln -Fis "${SCRIPT_DIR}/.emacs.d/init.el" ${EMACS_INIT}
+fi
