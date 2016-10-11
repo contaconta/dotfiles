@@ -60,5 +60,5 @@ fi
 EMACS_INIT="${HOME}/.emacs.d/init.el"
 if [ -e ${EMACS_INIT} ]; then
     rm ${EMACS_INIT}
-    ln -Fis "${SCRIPT_DIR}/.emacs.d/init.el" ${EMACS_INIT}
 fi
+ln -Fis "${SCRIPT_DIR}/.emacs.d/init.el" ${EMACS_INIT}
