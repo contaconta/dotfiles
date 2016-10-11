@@ -27,5 +27,5 @@ setopt share_history
 ################################
 # peco
 ################################
-zle -N peco-history-selection
-bindkey '^r' peco-history-selection
+zle -N peco-select-history
+bindkey '^r' peco-select-history
