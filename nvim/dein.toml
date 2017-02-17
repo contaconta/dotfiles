@@ -1,0 +1,29 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+
+[[plugins]]
+repo = 'davidhalter/jedi-vim'
+
+
+[[plugins]]
+repo    = 'vim-airline/vim-airline'
+depends = ['vim-airline-themes']
+
+[[plugins]]
+repo = 'vim-airline/vim-airline-themes'
+# hook_add = '''
+#     let g:airline_theme = 'solarized' 
+#     set background=dark
+# '''
+
+# [[plugins]] # solarized
+# repo = 'altercation/vim-colors-solarized'
+# hook_add = '''
+#     set background=dark
+# '''
