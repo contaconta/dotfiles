@@ -6,6 +6,7 @@ DOTFILES_ROOT_DIR="${HOME}/dotfiles"
 
 SCRIPT_DIR=$DOTFILES_ROOT_DIR
 AUTOGEN_DIR="${SCRIPT_DIR}/autogen"
+CONFIG_DIR="${HOME}/.config"
 
 #####################
 # tmux-powerline
@@ -66,6 +67,7 @@ ln -Fis "${SCRIPT_DIR}/.emacs.d/init.el" ${EMACS_INIT}
 #####################
 ## nvim
 #####################
+mkdir -p ${CONFIG_DIR}
 NVIM_INIT="${HOME}/.config/nvim"
 if [ -e ${NVIM_INIT} ]; then
     rm ${NVIM_INIT}
