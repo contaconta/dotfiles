@@ -1,5 +1,6 @@
 #! /usr/bin/env zsh
 
+# set -xe
 #####################
 # load scripts
 #####################
