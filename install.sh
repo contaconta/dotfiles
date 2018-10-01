@@ -58,11 +58,11 @@ fi
 #####################
 ## emacs
 #####################
-EMACS_INIT="${HOME}/.emacs.d/init.el"
-if [ -e ${EMACS_INIT} ]; then
-    rm ${EMACS_INIT}
-fi
-ln -Fis "${SCRIPT_DIR}/.emacs.d/init.el" ${EMACS_INIT}
+#EMACS_INIT="${HOME}/.emacs.d/init.el"
+#if [ -e ${EMACS_INIT} ]; then
+#    rm ${EMACS_INIT}
+#fi
+#ln -Fis "${SCRIPT_DIR}/.emacs.d/init.el" ${EMACS_INIT}
 
 #####################
 ## nvim
@@ -73,4 +73,3 @@ if [ -e ${NVIM_INIT} ]; then
     rm ${NVIM_INIT}
 fi
 ln -Fis "${SCRIPT_DIR}/nvim" ${NVIM_INIT}
-

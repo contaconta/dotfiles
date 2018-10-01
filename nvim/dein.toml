@@ -10,7 +10,6 @@ repo = 'scrooloose/nerdtree'
 [[plugins]]
 repo = 'davidhalter/jedi-vim'
 
-
 [[plugins]]
 repo    = 'vim-airline/vim-airline'
 depends = ['vim-airline-themes']
@@ -27,3 +26,6 @@ repo = 'vim-airline/vim-airline-themes'
 # hook_add = '''
 #     set background=dark
 # '''
+
+[[plugins]]
+repo = 'Lokaltog/vim-easymotion'
