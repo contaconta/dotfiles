@@ -6,7 +6,7 @@ function setup_first () {
     sudo apt-get update
     sudo apt-get install -y git zsh curl tmux mosh zip language-pack-ja
     if [ ! "`echo $SHELL`" = "/usr/bin/zsh" ]; then
-        chsh -s /usr/bin/zsh
+        sudo chsh $(whoami) -s /usr/bin/zsh
     fi
 
         export ZPLUG_HOME=${HOME}/.zplug
