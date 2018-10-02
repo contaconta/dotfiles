@@ -56,6 +56,7 @@ function install_python_packages () {
     pip install tqdm click
     pip install matplotlib scikit-image toolz
     pip install glances
+    pip install neovim
 }
 
 function install_opencv() {
@@ -134,4 +135,4 @@ function install_docker () {
 #install_python_packages
 #install_cmake
 #install_docker
-install_opencv
+#install_opencv

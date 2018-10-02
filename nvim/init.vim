@@ -52,6 +52,8 @@ syntax on
 filetype plugin indent on
 syntax enable
 
+let g:python3_host_prog = $PYENV_ROOT . '/shims/python3'
+
 " プラグインがインストールされるディレクトリ
 let s:dein_dir = expand('~/.cache/dein')
 " dein.vim 本体
