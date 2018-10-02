@@ -6,7 +6,7 @@ function setup_first () {
     sudo apt-get update
     sudo apt-get install -y git zsh curl tmux mosh zip language-pack-ja
     if [ ! "`echo $SHELL`" = "/usr/bin/zsh" ]; then
-        chsh -s /usr/bin/zsh
+        sudo chsh ubuntu -s /usr/bin/zsh
     fi
 
         export ZPLUG_HOME=${HOME}/.zplug
@@ -124,10 +124,66 @@ function install_docker () {
     curl -sSL https://get.docker.com/ | sh
 }
 
-setup_first
-install_neovim
-install_pyenv
-install_python_packages
-install_cmake
-install_docker
-install_opencv
+function install_cuda () {
+    sudo dpkg -i ${REPOS}
+    sudo apt-get update
+    sudo apt-get install -y --allow-unauthenticated cuda
+
+    if [ ! "`grep '/usr/local/cuda/bin' $ZSHRC_FILENAME`" ]; then
+        echo "write cuda config to $ZSHRC_FILENAME"
+        echo "# cuda" >> $ZSHRC_FILENAME
+        echo 'export PATH="$PATH:/usr/local/cuda/bin"'  >> $ZSHRC_FILENAME
+        echo 'export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda/lib64"' >> $ZSHRC_FILENAME
+    fi
+}
+
+function install_cuda_9_0_1604 () {
+    export ZSHRC_FILENAME="${HOME}/.zshrc"
+
+    cd $SETUP_INSTALL_DIR
+    export REPOS='cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64-deb'
+    if [ ! -e "${REPOS}" ]; then
+        echo "download cuda to $SETUP_INSTALL_DIR"
+        wget https://developer.nvidia.com/compute/cuda/9.0/prod/local_installers/${REPOS}
+    fi
+
+    install_cuda
+}
+
+
+function install_cuda_10_0_1604 () {
+    export ZSHRC_FILENAME="${HOME}/.zshrc"
+
+    cd $SETUP_INSTALL_DIR
+    export REPOS='cuda-repo-ubuntu1604-10-0-local-10.0.130-410.48_1.0-1_amd64'
+    if [ ! -e "${REPOS}" ]; then
+        echo "download cuda to $SETUP_INSTALL_DIR"
+        wget https://developer.nvidia.com/compute/cuda/10.0/prod/local_installers/${REPOS}
+    fi
+
+    install_cuda
+}
+
+function install_cudnn_7 () {
+    cd $SETUP_INSTALL_DIR
+
+    if [ ! -e 'cudnn.tgz' ]; then
+        echo "download cudnn"
+        curl -L -o libcudnn7_7.0.5.15-1+cuda9.0_amd64.deb \
+          https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1604/x86_64/libcudnn7_7.0.5.15-1+cuda9.0_amd64.deb
+        curl -L -o libcudnn7-dev_7.0.5.15-1+cuda9.0_amd64.deb \
+          https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1604/x86_64/libcudnn7-dev_7.0.5.15-1+cuda9.0_amd64.deb
+    fi
+    sudo dpkg -i libcudnn7_7.0.5.15-1+cuda9.0_amd64.deb
+    sudo dpkg -i libcudnn7-dev_7.0.5.15-1+cuda9.0_amd64.deb
+}
+
+#setup_first
+#install_neovim
+#install_pyenv
+#install_python_packages
+#install_cmake
+#install_docker
+#install_opencv
+#install_cuda_9_0_1604
+#install_cudnn_7
