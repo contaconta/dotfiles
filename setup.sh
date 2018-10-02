@@ -14,13 +14,8 @@ function setup_first () {
             git clone https://github.com/zplug/zplug $ZPLUG_HOME
     fi
 
-    if [ ! -e ${HOME}/dotfiles ]; then
-        cd ${HOME}
-        git clone https://github.com/contaconta/dotfiles.git
-        cd ${HOME}/dotfiles
-        zsh install.sh
-        echo "source ${HOME}/dotfiles/init.zsh" >> ~/.zshrc
-    fi
+    zsh install.sh
+    echo "source ${HOME}/dotfiles/init.zsh" >> ~/.zshrc
 }
 
 function install_neovim () {
@@ -129,10 +124,10 @@ function install_docker () {
     curl -sSL https://get.docker.com/ | sh
 }
 
-#setup_first
-#install_neovim
-#install_pyenv
-#install_python_packages
-#install_cmake
-#install_docker
-#install_opencv
+setup_first
+install_neovim
+install_pyenv
+install_python_packages
+install_cmake
+install_docker
+install_opencv
