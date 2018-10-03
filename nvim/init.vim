@@ -1,40 +1,58 @@
 " setting
-"文字コードをUFT-8に設定
-set fenc=utf-8
-" バックアップファイルを作らない
-set nobackup
-" スワップファイルを作らない
+" dein Scripts-----------------------------
+if &compatible
+  set nocompatible               " Be iMproved
+endif
+
 set noswapfile
-" 編集中のファイルが変更されたら自動で読み直す
-set autoread
-" バッファが編集中でもその他のファイルを開けるように
 set hidden
-" 入力中のコマンドをステータスに表示する
 set showcmd
-
-
-" 行番号を表示
 set number
-" 現在の行を強調表示
-set cursorline
-" 行番号の色を設定
-highlight LineNr ctermbg=0 ctermfg=125
-"hi clear CursorLine
+set smartindent
+set autoindent
+set showmatch
+set laststatus=2
+set mouse=
 
-" insertモードから抜ける
-inoremap <silent> jj <ESC>
-"inoremap <silent> <C-j> j
-"inoremap <silent> kk <ESC>
-"inoremap <silent> <C-k> k
+nnoremap j gj
+nnoremap k gk
+nnoremap <Down> gj
+nnoremap <Up> gk
 
-" tabs
-set tabstop=4
-set shiftwidth=4
-set expandtab  " タブの代わりにスペースを挿入する
+inoremap jj <ESC>
 
-" nerdtree
-" autocmd VimEnter * execute 'NERDTree'
+set hlsearch
+nnoremap <Esc><Esc> :<C-u>set nohlsearch<Return>
+nnoremap / :<C-u>set hlsearch<Return>/
+nnoremap ? :<C-u>set hlsearch<Return>?
+nnoremap * :<C-u>set hlsearch<Return>*
+nnoremap # :<C-u>set hlsearch<Return>#
 
+let mapleader = ","
+
+set smarttab
+set expandtab
+set tabstop=2
+set shiftwidth=2
+
+set ignorecase
+set smartcase
+set wrapscan
+
+set sh=/bin/bash
+tnoremap <silent> <ESC> <C-\><C-n>
+
+if has('persistent_undo')
+  set undodir=~/.vim/undo
+  set undofile
+endif
+
+syntax on
+
+filetype plugin indent on
+syntax enable
+
+let g:python3_host_prog = $PYENV_ROOT . '/shims/python3'
 
 " プラグインがインストールされるディレクトリ
 let s:dein_dir = expand('~/.cache/dein')
