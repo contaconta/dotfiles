@@ -2,6 +2,14 @@
 # http://qiita.com/yn-misaki/items/3ec0605cba228a7d5c9a
 export SETUP_INSTALL_DIR="${HOME}/install"
 
+function check_install() {
+    if [ "$1" == "Y" ] || [ "$1" == "y" ] || [ "$1" == "" ];then
+        echo 'True'
+    else
+        echo 'False'
+    fi
+}
+
 function setup_first () {
     sudo apt-get update
     sudo apt-get install -y git zsh curl tmux mosh zip language-pack-ja
@@ -31,8 +39,10 @@ function install_pyenv () {
         echo 'export PYENV_ROOT="$HOME/.pyenv"' >> $ZSHRC_FILENAME
         echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> $ZSHRC_FILENAME
         echo 'eval "$(pyenv init -)"' >> $ZSHRC_FILENAME
+        export PYENV_ROOT="$HOME/.pyenv"
+        export PATH="$PYENV_ROOT/bin:$PATH"
+        eval "$(pyenv init -)"
     fi
-    source $ZSHRC_FILENAME
 }
 
 function install_python_packages () {
@@ -178,12 +188,48 @@ function install_cudnn_7 () {
     sudo dpkg -i libcudnn7-dev_7.0.5.15-1+cuda9.0_amd64.deb
 }
 
-#setup_first
-#install_neovim
-#install_pyenv
-#install_python_packages
-#install_cmake
-#install_docker
-#install_opencv
-#install_cuda_9_0_1604
-#install_cudnn_7
+echo -n "Set up first? [Y/n] "
+read is_setup_first
+echo -n "Set up neovim[Y/n] "
+read is_setup_neovim
+echo -n "Set up python[Y/n] "
+read is_setup_python
+echo -n "Set up cmake[Y/n] "
+read is_setup_cmake
+echo -n "Set up docker[Y/n] "
+read is_setup_docker
+echo -n "Set up opencv[Y/n] "
+read is_setup_opencv
+echo -n "Set up cuda[Y/n] "
+read is_setup_cuda 
+
+ret=`check_install ${is_setup_first}`
+if [ ${ret} == 'True' ];then
+    setup_first
+fi
+ret=`check_install ${is_setup_neovim}`
+if [ ${ret} == 'True' ];then
+    install_neovim
+fi
+ret=`check_install ${is_setup_python}`
+if [ ${ret} == 'True' ];then
+    install_pyenv
+    install_python_packages
+fi
+ret=`check_install ${is_setup_cmake}`
+if [ ${ret} == 'True' ];then
+    install_cmake
+fi
+ret=`check_install ${is_setup_docker}`
+if [ ${ret} == 'True' ];then
+    install_docker
+fi
+ret=`check_install ${is_setup_opencv}`
+if [ ${ret} == 'True' ];then
+    install_opencv
+fi
+ret=`check_install ${is_setup_cuda}`
+if [ ${ret} == 'True' ];then
+    install_cuda_9_0_1604
+    install_cudnn_7
+fi
