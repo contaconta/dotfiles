@@ -27,7 +27,7 @@ function setup_first () {
 }
 
 function install_neovim () {
-    sudo add-apt-repository ppa:neovim-ppa/stable
+    sudo add-apt-repository -y ppa:neovim-ppa/stable
     sudo apt-get update
     sudo apt-get install -y neovim
 }
@@ -125,7 +125,7 @@ function install_opencv() {
 
 function install_cmake () {
     sudo apt-get install -y software-properties-common
-    sudo add-apt-repository ppa:george-edison55/cmake-3.x
+    sudo add-apt-repository -y ppa:george-edison55/cmake-3.x
     sudo apt-get update
     sudo apt-get install -y cmake
 }
