@@ -12,5 +12,5 @@ source ${SCRIPT_DIR}/zsh/alias.zsh
 source ${SCRIPT_DIR}/zsh/settings.zsh
 
 # run scripts
-tmux_ssh
+# tmux_ssh
 attach_tmux

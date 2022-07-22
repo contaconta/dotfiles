@@ -3,8 +3,10 @@
 
 ## Setup
 ```
-cd ~  
-git clone https://github.com/contaconta/dotfiles.git  
+cd ~
+git clone https://github.com/contaconta/dotfiles.git
+cd dotfiles
+zsh mac_setup.sh
 zsh install.sh
 ```
 

@@ -1,1 +1,1 @@
-brew install zsh tmux reattach-to-user-namespace git peco
+brew install zsh tmux git peco zplug
