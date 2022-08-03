@@ -16,27 +16,27 @@ else
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
 
-#####################
-# tmux-powerline
-#####################
-INSTALL_DIR="${AUTOGEN_DIR}/tmux-powerline"
-if [ -d ${INSTALL_DIR} ]; then
-    echo 'tmux-powerline is already installed.'
-else
-    echo 'install tmux-powerline'
-    git clone https://github.com/erikw/tmux-powerline.git ${INSTALL_DIR}
-fi
+# #####################
+# # tmux-powerline
+# #####################
+# INSTALL_DIR="${AUTOGEN_DIR}/tmux-powerline"
+# if [ -d ${INSTALL_DIR} ]; then
+#     echo 'tmux-powerline is already installed.'
+# else
+#     echo 'install tmux-powerline'
+#     git clone https://github.com/erikw/tmux-powerline.git ${INSTALL_DIR}
+# fi
 
-# symlink tmux theme
-tmux_default_theme_path="${INSTALL_DIR}/themes/default.sh"
-tmux_custom_theme_path="${SCRIPT_DIR}/tmux/powerline_conf/default.sh"
-if [ -e $tmux_default_theme_path ]; then
-    rm $tmux_default_theme_path
-    echo "remove default tmux theme"
-fi
-echo "link powerline theme"
-ln -Fis ${tmux_custom_theme_path} ${tmux_default_theme_path}
-echo ${tmux_default_theme_path}
+# # symlink tmux theme
+# tmux_default_theme_path="${INSTALL_DIR}/themes/default.sh"
+# tmux_custom_theme_path="${SCRIPT_DIR}/tmux/powerline_conf/default.sh"
+# if [ -e $tmux_default_theme_path ]; then
+#     rm $tmux_default_theme_path
+#     echo "remove default tmux theme"
+# fi
+# echo "link powerline theme"
+# ln -Fis ${tmux_custom_theme_path} ${tmux_default_theme_path}
+# echo ${tmux_default_theme_path}
 
 #####################
 # symlink .tmux.conf
